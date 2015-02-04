@@ -1,9 +1,11 @@
-FROM sergeyzh/centos6-epel
+FROM centos:centos6
+MAINTAINER Ian Blenke <ian@blenke.com>
 
-MAINTAINER Sergey Zhukov, sergey@jetbrains.com
+ADD epel.repo /etc/yum.repos.d/
+ADD RPM-GPG-KEY-EPEL-6 /etc/pki/rpm-gpg/
 
 ADD vmware-tools.repo /etc/yum.repos.d/
-RUN yum install -y vmware-tools-esx-nox
+RUN yum install -y wget tar vmware-tools-esx-nox
 
 ADD scripts /etc/vmware-tools/scripts
 RUN chmod -R +x /etc/vmware-tools/scripts/*
